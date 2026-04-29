@@ -141,11 +141,11 @@ public class RentalService(IConfiguration configuration) : IRentalService
             command.Parameters.AddWithValue("@rentalId", rentalId);
             await command.ExecuteNonQueryAsync(cancellationToken);
             
-            transaction.CommitAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
         }
         catch (Exception e)
         {
-            transaction.RollbackAsync(cancellationToken);
+            await transaction.RollbackAsync(cancellationToken);
             throw;
         }
     }
